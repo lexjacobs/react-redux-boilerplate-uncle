@@ -12,8 +12,17 @@ import {Router, Route, IndexRedirect, hashHistory} from 'react-router';
 import {persistStore, autoRehydrate} from 'redux-persist';
 import {Example} from '../containers/Example/ExampleContainer.jsx';
 
+let store;
+if (process.env.NODE_ENV === 'development') {
+  store = createStore(rootReducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(), autoRehydrate());  
+} else {
+  store = createStore(rootReducer, undefined, autoRehydrate());
+}
+
+
+
+
 // record a state of white listed reducers to localStorage
-const store = createStore(rootReducer, undefined, autoRehydrate());
 persistStore(store, {whitelist: ['exampleState'], keyPrefix: 'boilerplate-uncle:'});
 
 store.subscribe(() => {
