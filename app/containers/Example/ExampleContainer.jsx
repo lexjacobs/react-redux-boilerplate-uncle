@@ -4,6 +4,7 @@ require('./style.scss');
 import {Button} from 'react-bootstrap';
 import {connect} from 'react-redux';
 import * as actions from '../../actions/actions.js';
+
 const _Example = ({count, dispatch}) => {
 
   return (
