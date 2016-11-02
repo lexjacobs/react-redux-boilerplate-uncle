@@ -48,7 +48,7 @@ This option takes advantage of the selenium-server-standalone package located in
   * config: routing
   * containers: and process, should eventually be container logic, but probably also currently contains some stateless functional components
   * reducers: redux reducers
-  * styles: app supports modular css, but put global definitions here
+  * styles: app supports modular scss, but put global definitions here
   * utils: ajax route definitions, methods and configuration, variables for color codes
 * dist
   * index.html / bundle.js / assets prepared by webpack

@@ -14,19 +14,22 @@ import {Example} from '../containers/Example/ExampleContainer.jsx';
 
 let store;
 if (process.env.NODE_ENV === 'development') {
-  store = createStore(rootReducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(), autoRehydrate());  
+  store = createStore(rootReducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(), autoRehydrate());
 } else {
+  // don't bother loading redux-devtools if not in development mode
+  // autoRehydrate pulls state from localStorage
   store = createStore(rootReducer, undefined, autoRehydrate());
 }
 
-
-
-
 // record a state of white listed reducers to localStorage
-persistStore(store, {whitelist: ['exampleState'], keyPrefix: 'boilerplate-uncle:'});
+persistStore(store, {
+  whitelist: ['exampleState'],
+  keyPrefix: 'boilerplate-uncle:'
+});
 
 store.subscribe(() => {
   if (process.env.NODE_ENV === 'development') {
+    // log each update to the store in development mode
     console.log('store update: ', store.getState());
   }
 });
@@ -36,8 +39,8 @@ export const routes = (
     <Router history={hashHistory}>
       <Route path="/" component={NavBar}>
         <IndexRedirect to="/main"/>
-          <Route path="/main" component={Example}/>
-          <Route path="/alternate" component={Example}/>
+        <Route path="/main" component={Example}/>
+        <Route path="/alternate" component={Example}/>
       </Route>
     </Router>
   </Provider>
